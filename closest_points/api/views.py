@@ -18,6 +18,10 @@ def closest_points(request):
     try:
         points = [tuple(map(int, p.split(','))) for p in points_str.split(';')]
         
+         # Check if the number of points is less than 3
+        if len(points) < 3:
+            return Response({'error': 'Invalid size of input'}, status=status.HTTP_400_BAD_REQUEST)
+        
         # Find the closest points
         closest_points = find_closest_points(points)
 
