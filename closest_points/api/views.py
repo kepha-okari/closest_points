@@ -6,16 +6,35 @@ from rest_framework.response import Response
 from .models import Point
 from .serializers import PointSerializer
 
+
+
 @api_view(['POST'])
 def closest_points(request):
-
     # Parse the points from the request data
     points_str = request.data.get('points')
     if not points_str:
         return Response({'error': 'No points provided'}, status=status.HTTP_400_BAD_REQUEST)
-    points = [tuple(map(int, p.split(','))) for p in points_str.split(';')]
 
-    # Find the closest points
+    try:
+        points = [tuple(map(int, p.split(','))) for p in points_str.split(';')]
+        
+        # Find the closest points
+        closest_points = find_closest_points(points)
+
+        # Create Point objects and store them in the database
+        record = save_points_to_database(points, closest_points)
+
+        # Return the closest points
+        closest_points_str = ';'.join([','.join(map(str, p)) for p in closest_points])
+        return Response({'closest_points': closest_points_str}, status=status.HTTP_201_CREATED)
+
+    except ValueError:
+        return Response({'error': 'Invalid points format'}, status=status.HTTP_400_BAD_REQUEST)
+
+   
+
+
+def find_closest_points(points):
     closest_points = []
     min_distance = float('inf')
     for i in range(len(points)):
@@ -24,20 +43,12 @@ def closest_points(request):
             if distance < min_distance:
                 min_distance = distance
                 closest_points = [points[i], points[j]]
+    return closest_points
 
-    # Create Point objects and store them in the database
-    point_objs = []
+
+def save_points_to_database(points, closest_points):
     for p in points:
         closest_point = closest_points[0] if (p != closest_points[1] and p != closest_points[0]) else closest_points[1]
-        point = Point(x=p[0], y=p[1], closest_point_x=closest_point[0], closest_point_y=closest_point[1])
-        point_objs.append(point)
+        point = Point.objects.create(x=p[0], y=p[1], closest_point_x=closest_point[0], closest_point_y=closest_point[1])
         point.save()
 
-    # Serialize the closest points and return them in the response
-    serializer = PointSerializer(data=point_objs, many=True)
-    serializer.is_valid()
-
-    # Return the closest points
-    closest_points_str = ';'.join([','.join(map(str, p)) for p in closest_points])
-    return Response({'closest_points': closest_points_str}, status=status.HTTP_201_CREATED)
-    # return Response({closest_points_str}, status=status.HTTP_201_CREATED)
