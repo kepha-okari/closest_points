@@ -1,0 +1,8 @@
+venv/
+*.swp
+*.swo
+*.DS_Store
+.idea/
+--pycache--/
+*.pyc
+*.bak
