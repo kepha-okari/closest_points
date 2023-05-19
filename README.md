@@ -80,4 +80,4 @@ The API will respond with the closest points among the provided set of points.
 
 - Password
     ```bash
-    !23qweASDß
+    !23qweASD
