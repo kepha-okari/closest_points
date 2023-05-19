@@ -15,63 +15,72 @@ Before setting up this application, ensure that you have the following prerequis
    git clone https://github.com/kepha-okari/closest_points.git
 
 
-### Create and activate a virtual environment:
-```bash
-python3 -m venv venv
-source venv/bin/activate
+
+### Create and activate a virtual environment
+
+
+- Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+
 
 ### Install dependancies:
-```bash 
-pip install -r requirements.txt
+- Install all the dependancies:
+   ```bash
+   pip install -r requirements.txt
+ 
+
 
 ### Apply the database migrations:
-```bash
-python manage.py migrate
+-  make migrations
+
+   ```bash
+   python manage.py migrate
 
 ## Running Tests:
-To run the tests for the Closest Points API, use the following command:
-```bash
-python manage.py test
+- To run the tests for the Closest Points API, use the following command:
+    ```bash
+    python manage.py test
 
 ## Usage
 To use the Closest Points API, you can send a POST request to the /api/closest_points/ endpoint with the following parameters:
 
 * `points`: A string representing the points on a grid, separated by semicolons (;). Each point should be in the format `x,y`.
 
-Example request on curl
-```bash
-curl --location --request POST 'http://localhost:8000/api/closest_points/' \
---header 'Content-Type: application/json' \
---data-raw '{
-  "points": "2,2;-1,30;20,11;4,5"
-}
-'
+- Example request on curl
+    ```bash
+    curl --location --request POST 'http://localhost:8000/api/closest_points/' \
+    --header 'Content-Type: application/json' \
+    --data-raw '{
+    "points": "2,2;-1,30;20,11;4,5"
+    }
+    '
 
 The API will respond with the closest points among the provided set of points.
 
-Example response:
-
-
-```bash
-`HTTP/1.1 201 Created
-Content-Type: application/json
-{
-  "closest_points": "2,2;4,5"
-}`
+- Example response:
+    ```bash
+    `HTTP/1.1 201 Created
+    Content-Type: application/json
+    {
+    "closest_points": "2,2;4,5"
+    }`
 
 
 
 ## Admin
-to access the django admin portal. use the link below:
-`http:\\localhost:8000\admin`
+- to access the django admin portal. use the link below:
+    ```bash
+    http:\\localhost:8000\admin
 
-Username
-```bash
-admin
+- Username
+    ```bash
+    admin
 
-Password
-``bash
-ß!23qweASD
+- Password
+    ``bash
+    !23qweASD
 
 
 
