@@ -79,7 +79,7 @@ The API will respond with the closest points among the provided set of points.
     admin
 
 - Password
-    ``bash
+    ```bash
     !23qweASD
 
 
