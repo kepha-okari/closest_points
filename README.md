@@ -65,9 +65,13 @@ Content-Type: application/json
 to access the django admin portal. use the link below:
 `http:\\localhost:8000\admin`
 
+Username
 ```bash
-    username : admin
-    password : !23qweASD
+admin
+
+Password
+``bash
+ß!23qweASD
 
 
 
