@@ -1,6 +1,19 @@
 # Closest Points API
 
-This Django application provides an API endpoint to find the closest points among a given set of points on a grid. It also stores the received set of points and their closest points in a database.
+To determine which points on a grid are nearest to one another, this Django application offers an API endpoint. In a database, it also keeps the points that were received and their proximity points## Prerequisites
+
+### Preliquisites
+Before setting up this application, ensure that you have the following prerequisites installed on your system:
+
+- Python (version 3)
+- Pip (Python package installer)
+- [Any other dependencies or tools required by your specific Django app as listed in the requirements.txt file]
+
+## Installation
+1. Clone the repository to your local machine:
+   ```bash
+   git clone https://github.com/kepha-okari/closest_points.git
+
 
 ### Create and activate a virtual environment:
 `python3 -m venv venv`
@@ -10,7 +23,7 @@ This Django application provides an API endpoint to find the closest points amon
 `pip install -r requirements.txt`
 
 ### Apply the database migrations:
-`python manage.py migrateß`
+`python manage.py migrate`
 
 ## Running Tests:
 To run the tests for the Closest Points API, use the following command:
@@ -35,6 +48,14 @@ Content-Type: application/json
 }`
 
 
+
+## Admin
+to access the django admin portal. use the link below:
+`http:\\localhost:8000\admin`
+
+```bash
+    username : admin
+    password : !23qweASD
 
 
 
